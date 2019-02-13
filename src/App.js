@@ -16,6 +16,7 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <MHeader />
+        <Carousel />
         {/* <Test /> */}
       </ThemeProvider>
     );
