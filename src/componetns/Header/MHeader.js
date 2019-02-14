@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 
 import { Header } from 'react-native-elements';
 import IconsRight from './IconsRight';
+import IconsLeft from './IconsLeft';
+import Drawer from '../Drawer/Drawer';
 
 const iconSize = 26;
 
 export default class MHeader extends Component {
   state = {
+    configIconLeft: {
+      show: true,
+      name: 'bars'
+    },
     configIcon1: {
       show: true,
       name: 'search'
@@ -14,13 +21,27 @@ export default class MHeader extends Component {
     configIcon2: {
       show: true,
       name: 'shopping-basket'
+    },
+    showNavigator: false
+  };
+
+  onIconLeftPress = () => {
+    const iconName = this.state.configIconLeft.name;
+    if (iconName === 'bars') {
+      this.setState({ showNavigator: true });
     }
   };
 
   render() {
-    return (
+    const { showNavigator } = this.state;
+    let showComponent = (
       <Header
-        leftComponent={{ icon: 'menu', color: '#fff', size: iconSize + 10 }}
+        leftComponent={
+          <IconsLeft
+            configIcon={this.state.configIconLeft}
+            onIconLeftPress={this.onIconLeftPress}
+          />
+        }
         centerComponent={{
           text: 'MY LOGO',
           style: { color: '#fff', fontSize: 25, right: 30 }
@@ -33,5 +54,7 @@ export default class MHeader extends Component {
         }
       />
     );
+
+    return <View>{showComponent}</View>;
   }
 }
