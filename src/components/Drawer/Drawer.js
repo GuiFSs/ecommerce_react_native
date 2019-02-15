@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { Platform, Dimensions, Text, View } from 'react-native';
 import { createDrawerNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from '../../screens/HomeScreen';
