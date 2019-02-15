@@ -36,6 +36,7 @@ export default class Carousel extends Component {
             })
           }
           
+
         </ScrollView>
       </View>
     );
