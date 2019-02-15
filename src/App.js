@@ -1,26 +1,11 @@
-import React, { Component } from 'react';
+import { createDrawerNavigator, createAppContainer } from 'react-navigation';
 
-import { ThemeProvider } from 'react-native-elements';
-import MHeader from './componetns/Header/MHeader';
-import Test from './componetns/Testing/Test';
-import Carousel from './componetns/Carousel/Carousel';
+import HomeScreen from './screens/HomeScreen';
 
-const theme = {
-  Header: {
-    backgroundColor: '#E60014'
+const App = createDrawerNavigator({
+  Home: {
+    screen: HomeScreen
   }
-};
+});
 
-class App extends Component {
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <MHeader />
-        <Carousel />
-        {/* <Test /> */}
-      </ThemeProvider>
-    );
-  }
-}
-
-export default App;
+export default createAppContainer(App);

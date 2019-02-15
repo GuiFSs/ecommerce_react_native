@@ -23,6 +23,7 @@ const IconsRight = props => {
           color='#fff'
           containerStyle={{ right: 40 }}
           size={iconSize}
+          onPress={() => console.log('wtf')}
         />
       )}
 
