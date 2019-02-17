@@ -7,7 +7,7 @@ import { Icon } from 'react-native-elements';
 const iconSize = 26;
 
 const IconsLeft = props => {
-  const { configIcon, onIconLeftPress } = props;
+  const { configIcon, onIconPress } = props;
 
   return (
     <View
@@ -22,7 +22,7 @@ const IconsLeft = props => {
           type='font-awesome'
           color='#fff'
           size={iconSize}
-          onPress={onIconLeftPress}
+          onPress={() => onIconPress(configIcon.name)}
         />
       )}
     </View>

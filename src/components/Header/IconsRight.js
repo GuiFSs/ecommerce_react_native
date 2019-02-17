@@ -7,7 +7,7 @@ import { Icon } from 'react-native-elements';
 const iconSize = 26;
 
 const IconsRight = props => {
-  const { configIcon1, configIcon2 } = props;
+  const { configIcon, onPress } = props;
 
   return (
     <View
@@ -16,32 +16,27 @@ const IconsRight = props => {
         justifyContent: 'space-between'
       }}
     >
-      {configIcon1.show && (
-        <Icon
-          name={configIcon1.name}
-          type='font-awesome'
-          color='#fff'
-          containerStyle={{ right: 40 }}
-          size={iconSize}
-          onPress={() => console.log('wtf')}
-        />
-      )}
-
-      {configIcon2.show && (
-        <Icon
-          name={configIcon2.name}
-          type='font-awesome'
-          color='#fff'
-          size={iconSize}
-        />
-      )}
+      {configIcon.map((config, i) => {
+        return (
+          config.show && (
+            <Icon
+              key={i}
+              name={config.name}
+              type='font-awesome'
+              color='#fff'
+              containerStyle={config.style || {}}
+              size={iconSize}
+              onPress={() => onPress(config.name)}
+            />
+          )
+        );
+      })}
     </View>
   );
 };
 
 IconsRight.propTypes = {
-  configIcon1: PropTypes.object.isRequired,
-  configIcon2: PropTypes.object.isRequired
+  configIcon: PropTypes.array.isRequired
 };
 
 export default IconsRight;
