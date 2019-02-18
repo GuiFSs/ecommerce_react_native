@@ -8,8 +8,8 @@ export default class Carousel extends Component {
     this.state = { anuncio: [] };
   }
 
-  componentDidMount() {
-    axios
+  async componentDidMount() {
+    await axios
       .get("https://aux-ecommerce-api.herokuapp.com/api/anuncio")
       .then(res => {
         this.setState({ anuncio: res.data.anuncios });
