@@ -1,43 +1,47 @@
-import React, { Component } from "react";
-import { Card } from "react-native-elements";
+import React, { Component } from 'react';
+import { Card } from 'react-native-elements';
+import { ActivityIndicator } from 'react-native';
 
-import Item from "./item";
-import { getList } from "./ItemAction";
+import Item from './item';
+import { connect } from 'react-redux';
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { getProdutos } from '../../actions/produtos';
 
 class CardOffers extends Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    this.props.getList();
-    console.log("teste");
+    this.props.getProdutos();
   }
-  renderItem() {
-    //props List esta vazio!!
-    const list = this.props.list || [];
-    console.log(list);
-    return list.map(produto => {
-      <Item
-        img={produto.imagens[0]}
-        title={produto.descricao}
-        price={produto.preco}
-      />;
-    });
-  }
+
   render() {
+    const { loading, produtos } = this.props.produtos;
+
+    let listItems = <ActivityIndicator size='large' color='#E60014' />;
+
+    if (loading === false) {
+      listItems = produtos.map(produto => (
+        <Item
+          key={produto._id}
+          img={produto.imagens[0]}
+          title={produto.descricao}
+          price={produto.preco}
+        />
+      ));
+    }
+
     return (
-      <Card title={"OFERTAS DO DIA"} containerStyle={{ marginBottom: 20 }}>
-        {this.renderItem()}
+      <Card title={'OFERTAS DO DIA'} containerStyle={{ marginBottom: 20 }}>
+        {listItems}
       </Card>
     );
   }
 }
-const mapStateToProps = state => ({ list: state.item.list });
-const mapDipatchToProps = dispatch => bindActionCreators({ getList }, dispatch);
+const mapStateToProps = state => ({
+  produtos: state.produtos
+});
 export default connect(
   mapStateToProps,
-  mapDipatchToProps
+  { getProdutos }
 )(CardOffers);

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import React, { Component } from 'react';
+import { View, Image, Text, StyleSheet } from 'react-native';
 
 export default class item extends Component {
   render() {
     return (
       <View>
-        <Image style={styles.imagem} source={this.props.img} />
+        <Image style={styles.imagem} source={{ uri: this.props.img }} />
         <Text style={styles.txtTitle}>{this.props.title}</Text>
         <Text style={styles.txtOldPrice}>{this.props.price - 100}</Text>
         <Text style={styles.txtNewPrice}>{this.props.price}</Text>
@@ -17,13 +17,13 @@ export default class item extends Component {
 const styles = StyleSheet.create({
   imagem: {
     flex: 1,
-    alignSelf: "center",
+    alignSelf: 'center',
     width: 200,
     height: 200,
     marginBottom: 10
   },
   txtTitle: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 20
   },
   txtOldPrice: {

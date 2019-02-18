@@ -1,8 +1,8 @@
-import { combineReducers } from "redux";
-import testReducer from "./testReducer";
-import ItemReducers from "../components/Card-Offers/ItemReducers";
+import { combineReducers } from 'redux';
+import testReducer from './test';
+import produtosReducer from './produtos';
 
 export default combineReducers({
   test: testReducer,
-  item: ItemReducers
+  produtos: produtosReducer
 });

@@ -36,11 +36,9 @@ export default class DrawerList extends Component {
 
   render() {
     const { list, showLoginModal } = this.state;
-    console.log(showLoginModal);
 
     if (showLoginModal) {
       //TODO: fazer um modal para login e cadastro
-      console.log('mostrar modal');
     }
 
     return (
