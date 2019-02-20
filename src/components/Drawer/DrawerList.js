@@ -4,6 +4,7 @@ import { ScrollView, View, StyleSheet } from 'react-native';
 import { ListItem, Icon, Text } from 'react-native-elements';
 
 import { NavigationActions } from 'react-navigation';
+import LoginModal from '../LoginModal/LoginModal';
 
 export default class DrawerList extends Component {
   state = {
@@ -29,6 +30,8 @@ export default class DrawerList extends Component {
   };
 
   handlerLoginModal = () => {
+    console.log('pressed');
+
     this.setState(prevState => ({
       showLoginModal: !prevState.showLoginModal
     }));
@@ -37,13 +40,9 @@ export default class DrawerList extends Component {
   render() {
     const { list, showLoginModal } = this.state;
 
-    if (showLoginModal) {
-      //TODO: fazer um modal para login e cadastro
-    }
-
     return (
-      <View onTouchEnd={this.handlerLoginModal}>
-        <View style={styles.userView}>
+      <View>
+        <View style={styles.userView} onTouchEnd={this.handlerLoginModal}>
           <Icon
             name='person'
             type='material'
@@ -61,6 +60,12 @@ export default class DrawerList extends Component {
             </Text>
           </View>
         </View>
+
+        <LoginModal
+          isVisible={showLoginModal}
+          handlerLoginModal={this.handlerLoginModal}
+        />
+
         <ScrollView>
           <View>
             {list.map((item, i) => (
