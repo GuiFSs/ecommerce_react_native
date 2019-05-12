@@ -19,7 +19,7 @@ type OtherState = {
 };
 
 export default class MHeader extends Component<INavigationProps, IState> {
-  state = {
+  state: IState = {
     configIconLeft: {
       show: true,
       name: 'bars'
@@ -31,7 +31,8 @@ export default class MHeader extends Component<INavigationProps, IState> {
     configIconRight: [
       {
         show: true,
-        name: 'search'
+        name: 'search',
+        style: { right: 40 }
       },
       {
         show: true,
@@ -139,7 +140,7 @@ export default class MHeader extends Component<INavigationProps, IState> {
     const { configIconLeft, centerComponent, configIconRight } = this.state;
 
     return (
-      <View style={{ top: 0 }}>
+      <View style={{ marginTop: '-4%' }}>
         <Header
           leftComponent={
             <IconsLeft

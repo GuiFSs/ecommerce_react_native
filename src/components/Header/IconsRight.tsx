@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { IIcon } from '../../models/types/types';
 
-const iconSize = 26;
+const iconSize = 22;
 
 interface IProps {
   configIcon: IIcon[];

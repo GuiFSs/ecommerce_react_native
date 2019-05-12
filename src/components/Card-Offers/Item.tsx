@@ -13,8 +13,10 @@ const Item: React.SFC<IProps> = ({ imagem, descricao, preco }) => (
     <Text numberOfLines={1} style={styles.txtTitle}>
       {descricao}
     </Text>
-    <Text style={styles.txtOldPrice}>{preco - 100}</Text>
-    <Text style={styles.txtNewPrice}>{preco}</Text>
+    <Text style={styles.txtOldPrice}>
+      de R$: {(preco + (20 / 100) * preco).toFixed(2)}
+    </Text>
+    <Text style={styles.txtNewPrice}>R$: {preco.toFixed(2)}</Text>
   </View>
 );
 
@@ -30,10 +32,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   txtOldPrice: {
-    fontSize: 15
+    fontSize: 15,
+    textDecorationLine: 'line-through'
   },
   txtNewPrice: {
-    fontSize: 21
+    fontSize: 22,
+    fontWeight: 'bold'
   }
 });
 

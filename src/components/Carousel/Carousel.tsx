@@ -38,15 +38,14 @@ export default class Carousel extends Component<{}, IState> {
           scrollEventThrottle={10}
           pagingEnabled
         >
-          {anuncios &&
-            anuncios.map(anuncio => (
-              <View key={anuncio._id}>
-                <Image
-                  source={{ uri: anuncio.imagem }}
-                  style={{ width: width, height: height }}
-                />
-              </View>
-            ))}
+          {anuncios.map(anuncio => (
+            <View key={anuncio._id}>
+              <Image
+                source={{ uri: anuncio.imagem }}
+                style={{ width: width, height: height }}
+              />
+            </View>
+          ))}
         </ScrollView>
       </View>
     );
