@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { ThemeProvider } from 'react-native-elements';
+import { ThemeProvider, Image, Text } from 'react-native-elements';
 import MHeader from '../components/Header/MHeader';
 import Carousel from '../components/Carousel/Carousel';
-import Adverts from '../components/Adverts/adverts';
+import Adverts from '../components/Adverts/Adverts';
 import Card from '../components/Card-Offers/Card';
+
+import { INavigationProps } from '../models/types/types';
 
 const theme = {
   Header: {
@@ -12,17 +14,16 @@ const theme = {
   }
 };
 
-class HomeScreen extends Component {
+class HomeScreen extends Component<INavigationProps> {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <MHeader navigation={this.props.navigation} />
-        <View style={styles.home}>
+        <View style={{ flex: 1 }}>
+          <MHeader navigation={this.props.navigation} />
           <ScrollView>
             <Carousel />
             <Adverts />
             <Card />
-            {/* <Test /> */}
           </ScrollView>
         </View>
       </ThemeProvider>

@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { SET_PRODUTOS_LOADING, GET_PRODUTOS } from './types';
+import { SET_PRODUTOS_LOADING, GET_PRODUTOS, ProdutosTypes } from './types';
+import { Dispatch } from 'redux';
 
 const BASE_URL = 'https://aux-ecommerce-api.herokuapp.com/api/produtos';
 
-export const getProdutos = () => async dispatch => {
+export const getProdutos = () => async (dispatch: Dispatch<ProdutosTypes>) => {
   dispatch(setProdutosLoading(true));
   try {
     const produtos = await axios.get(BASE_URL);
@@ -20,9 +21,7 @@ export const getProdutos = () => async dispatch => {
   dispatch(setProdutosLoading(false));
 };
 
-export const setProdutosLoading = bool => {
-  return {
-    type: SET_PRODUTOS_LOADING,
-    payload: bool
-  };
-};
+export const setProdutosLoading = (bool: boolean): ProdutosTypes => ({
+  type: SET_PRODUTOS_LOADING,
+  payload: bool
+});

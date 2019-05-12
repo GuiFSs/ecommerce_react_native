@@ -1,14 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { IIcon } from '../../models/types/types';
 
 const iconSize = 26;
 
-const IconsRight = props => {
-  const { configIcon, onPress } = props;
+interface IProps {
+  configIcon: IIcon[];
+  onPress: Function;
+}
 
+const IconsRight: React.SFC<IProps> = ({ configIcon, onPress }) => {
   return (
     <View
       style={{
@@ -24,7 +27,7 @@ const IconsRight = props => {
               name={config.name}
               type='font-awesome'
               color='#fff'
-              containerStyle={config.style || {}}
+              containerStyle={config.style}
               size={iconSize}
               onPress={() => onPress(config.name)}
             />
@@ -33,10 +36,6 @@ const IconsRight = props => {
       })}
     </View>
   );
-};
-
-IconsRight.propTypes = {
-  configIcon: PropTypes.array.isRequired
 };
 
 export default IconsRight;

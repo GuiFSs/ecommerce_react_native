@@ -2,9 +2,13 @@ import React from 'react';
 import { View, TextInput } from 'react-native';
 import { Text } from 'react-native-elements';
 
-const CenterComponent = props => {
-  const { type, onChangeText, value } = props;
+interface IProps {
+  type: string;
+  onChangeText(text: string): void;
+  value: string;
+}
 
+const CenterComponent: React.SFC<IProps> = ({ type, onChangeText, value }) => {
   let component = (
     <Text h3 style={{ color: '#fff' }}>
       MY LOGO
@@ -18,7 +22,7 @@ const CenterComponent = props => {
         placeholder='tem tuuudo, pode procurar :)'
         style={{ color: '#fff', fontSize: 18 }}
         autoFocus={true}
-        onChangeText={onChangeText}
+        onChangeText={text => onChangeText(text)}
         value={value}
       />
     );

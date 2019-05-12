@@ -1,14 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { IIcon } from '../../models/types/types';
 
 const iconSize = 26;
 
-const IconsLeft = props => {
-  const { configIcon, onIconPress } = props;
+interface IProps {
+  configIcon: IIcon;
+  onIconPress: Function;
+}
 
+const IconsLeft: React.SFC<IProps> = ({ configIcon, onIconPress }) => {
   return (
     <View
       style={{
@@ -27,10 +30,6 @@ const IconsLeft = props => {
       )}
     </View>
   );
-};
-
-IconsLeft.propTypes = {
-  configIcon: PropTypes.object.isRequired
 };
 
 export default IconsLeft;

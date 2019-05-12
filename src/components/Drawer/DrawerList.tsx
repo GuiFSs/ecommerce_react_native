@@ -3,10 +3,16 @@ import { ScrollView, View, StyleSheet } from 'react-native';
 
 import { ListItem, Icon, Text } from 'react-native-elements';
 
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, DrawerItemsProps } from 'react-navigation';
 import LoginModal from '../LoginModal/LoginModal';
+import { INavigationProps } from '../../models/types/types';
 
-export default class DrawerList extends Component {
+interface IState {
+  showLoginModal: boolean;
+  list: object[];
+}
+
+export default class DrawerList extends Component<DrawerItemsProps, IState> {
   state = {
     showLoginModal: false,
     list: [
@@ -22,7 +28,7 @@ export default class DrawerList extends Component {
       }
     ]
   };
-  onPressItem = route => {
+  onPressItem = (route: string) => {
     const navigateAction = NavigationActions.navigate({
       routeName: route
     });

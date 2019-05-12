@@ -5,8 +5,20 @@ import { Header } from 'react-native-elements';
 import IconsRight from './IconsRight';
 import IconsLeft from './IconsLeft';
 import CenterComponent from './CenterComponent';
+import { INavigationProps, IIcon } from '../../models/types/types';
 
-export default class MHeader extends Component {
+interface IState {
+  configIconLeft: IIcon;
+  centerComponent: { type: string; value: string };
+  configIconRight: IIcon[];
+}
+
+type OtherState = {
+  key: 'configIconLeft' | 'centerComponent' | 'configIconRight';
+  value: {};
+};
+
+export default class MHeader extends Component<INavigationProps, IState> {
   state = {
     configIconLeft: {
       show: true,
@@ -19,8 +31,7 @@ export default class MHeader extends Component {
     configIconRight: [
       {
         show: true,
-        name: 'search',
-        style: { right: 40 }
+        name: 'search'
       },
       {
         show: true,
@@ -29,7 +40,7 @@ export default class MHeader extends Component {
     ]
   };
 
-  handlerSearchBar = text => {
+  handlerSearchBar = (text: string) => {
     const { centerComponent } = this.state;
 
     const newConfigIconRight = {
@@ -38,22 +49,26 @@ export default class MHeader extends Component {
       style: { right: 40 }
     };
 
-    const otherState = {
+    const otherState: OtherState = {
       key: 'centerComponent',
       value: { ...centerComponent, value: text }
     };
     this.setNewConfigRight(newConfigIconRight, 0, otherState);
   };
 
-  setNewConfigRight = (config, index, otherState) => {
+  setNewConfigRight = (
+    config: IIcon,
+    index: number,
+    otherState: OtherState
+  ) => {
     const { configIconRight } = this.state;
     const newConfigIconRight = [...configIconRight];
+
     newConfigIconRight[index] = config;
 
     if (otherState) {
       this.setState({
-        configIconRight: newConfigIconRight,
-        [otherState.key]: otherState.value
+        configIconRight: newConfigIconRight
       });
     } else {
       this.setState({
@@ -62,7 +77,7 @@ export default class MHeader extends Component {
     }
   };
 
-  onIconPress = iconName => {
+  onIconPress = (iconName: string) => {
     if (iconName === 'bars') {
       this.props.navigation.toggleDrawer();
     }
@@ -76,7 +91,7 @@ export default class MHeader extends Component {
         style: { right: 40 }
       };
 
-      const otherState = {
+      const otherState: OtherState = {
         key: 'centerComponent',
         value: { ...centerComponent, value: '' }
       };
@@ -90,7 +105,8 @@ export default class MHeader extends Component {
           name: 'bars'
         },
         centerComponent: {
-          type: 'text'
+          type: 'text',
+          value: ''
         },
         configIconRight: [
           {
@@ -109,11 +125,11 @@ export default class MHeader extends Component {
     if (iconName === 'search') {
       this.setState(prevState => {
         const newIconRight = [...prevState.configIconRight];
-        newIconRight[0] = { ...newIconRight, show: false };
+        newIconRight[0] = { ...newIconRight[0], show: false };
         return {
           configIconLeft: { ...prevState.configIconLeft, name: 'arrow-left' },
           configIconRight: newIconRight,
-          centerComponent: { ...prevState, type: 'input' }
+          centerComponent: { ...prevState.centerComponent, type: 'input' }
         };
       });
     }

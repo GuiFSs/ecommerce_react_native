@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import { Dimensions, View } from 'react-native';
 import {
@@ -13,7 +13,12 @@ import {
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-const LoginModal = ({ isVisible, handlerLoginModal }) => (
+interface IProps {
+  isVisible: boolean;
+  handlerLoginModal: Function;
+}
+
+const LoginModal: React.SFC<IProps> = ({ isVisible, handlerLoginModal }) => (
   <Overlay
     isVisible={isVisible}
     onBackdropPress={handlerLoginModal}
