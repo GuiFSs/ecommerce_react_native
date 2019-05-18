@@ -1,7 +1,7 @@
 import {
   SET_PRODUTOS_LOADING,
   GET_PRODUTOS,
-  ProdutosTypes
+  ProdutosTypes,
 } from '../actions/types';
 import { IProduto } from '../models/types/types';
 
@@ -12,7 +12,7 @@ export interface IProdutoState {
 
 const initialState: IProdutoState = {
   produtos: [],
-  loading: false
+  loading: false,
 };
 
 const produtosReducer = (state = initialState, action: ProdutosTypes) => {
@@ -20,12 +20,12 @@ const produtosReducer = (state = initialState, action: ProdutosTypes) => {
     case GET_PRODUTOS:
       return {
         ...state,
-        produtos: action.payload
+        produtos: action.payload,
       };
     case SET_PRODUTOS_LOADING:
       return {
         ...state,
-        loading: action.payload
+        loading: action.payload,
       };
     default:
       return { ...state };

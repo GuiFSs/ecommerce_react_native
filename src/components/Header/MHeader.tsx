@@ -13,32 +13,32 @@ interface IState {
   configIconRight: IIcon[];
 }
 
-type OtherState = {
+interface IOtherState {
   key: 'configIconLeft' | 'centerComponent' | 'configIconRight';
   value: {};
-};
+}
 
 export default class MHeader extends Component<INavigationProps, IState> {
   state: IState = {
     configIconLeft: {
       show: true,
-      name: 'bars'
+      name: 'bars',
     },
     centerComponent: {
       type: 'text',
-      value: ''
+      value: '',
     },
     configIconRight: [
       {
         show: true,
         name: 'search',
-        style: { right: 40 }
+        style: { right: 40 },
       },
       {
         show: true,
-        name: 'shopping-basket'
-      }
-    ]
+        name: 'shopping-basket',
+      },
+    ],
   };
 
   handlerSearchBar = (text: string) => {
@@ -47,12 +47,12 @@ export default class MHeader extends Component<INavigationProps, IState> {
     const newConfigIconRight = {
       name: 'times',
       show: text.length !== 0,
-      style: { right: 40 }
+      style: { right: 40 },
     };
 
-    const otherState: OtherState = {
+    const otherState: IOtherState = {
       key: 'centerComponent',
-      value: { ...centerComponent, value: text }
+      value: { ...centerComponent, value: text },
     };
     this.setNewConfigRight(newConfigIconRight, 0, otherState);
   };
@@ -60,7 +60,7 @@ export default class MHeader extends Component<INavigationProps, IState> {
   setNewConfigRight = (
     config: IIcon,
     index: number,
-    otherState: OtherState
+    otherState: IOtherState,
   ) => {
     const { configIconRight } = this.state;
     const newConfigIconRight = [...configIconRight];
@@ -69,18 +69,19 @@ export default class MHeader extends Component<INavigationProps, IState> {
 
     if (otherState) {
       this.setState({
-        configIconRight: newConfigIconRight
+        configIconRight: newConfigIconRight,
       });
     } else {
       this.setState({
-        configIconRight: newConfigIconRight
+        configIconRight: newConfigIconRight,
       });
     }
   };
 
   onIconPress = (iconName: string) => {
+    const { navigation } = this.props;
     if (iconName === 'bars') {
-      this.props.navigation.toggleDrawer();
+      navigation.toggleDrawer();
     }
 
     if (iconName === 'times') {
@@ -89,12 +90,12 @@ export default class MHeader extends Component<INavigationProps, IState> {
       const newConfigIconRight = {
         name: 'times',
         show: false,
-        style: { right: 40 }
+        style: { right: 40 },
       };
 
-      const otherState: OtherState = {
+      const otherState: IOtherState = {
         key: 'centerComponent',
-        value: { ...centerComponent, value: '' }
+        value: { ...centerComponent, value: '' },
       };
       this.setNewConfigRight(newConfigIconRight, 0, otherState);
     }
@@ -103,34 +104,34 @@ export default class MHeader extends Component<INavigationProps, IState> {
       this.setState({
         configIconLeft: {
           show: true,
-          name: 'bars'
+          name: 'bars',
         },
         centerComponent: {
           type: 'text',
-          value: ''
+          value: '',
         },
         configIconRight: [
           {
             show: true,
             name: 'search',
-            style: { right: 40 }
+            style: { right: 40 },
           },
           {
             show: true,
-            name: 'shopping-basket'
-          }
-        ]
+            name: 'shopping-basket',
+          },
+        ],
       });
     }
 
     if (iconName === 'search') {
-      this.setState(prevState => {
+      this.setState((prevState) => {
         const newIconRight = [...prevState.configIconRight];
         newIconRight[0] = { ...newIconRight[0], show: false };
         return {
           configIconLeft: { ...prevState.configIconLeft, name: 'arrow-left' },
           configIconRight: newIconRight,
-          centerComponent: { ...prevState.centerComponent, type: 'input' }
+          centerComponent: { ...prevState.centerComponent, type: 'input' },
         };
       });
     }
@@ -142,25 +143,25 @@ export default class MHeader extends Component<INavigationProps, IState> {
     return (
       <View style={{ marginTop: '-4%' }}>
         <Header
-          leftComponent={
+          leftComponent={(
             <IconsLeft
               configIcon={configIconLeft}
               onIconPress={this.onIconPress}
             />
-          }
-          centerComponent={
+)}
+          centerComponent={(
             <CenterComponent
               type={centerComponent.type}
               onChangeText={this.handlerSearchBar}
               value={centerComponent.value}
             />
-          }
-          rightComponent={
+)}
+          rightComponent={(
             <IconsRight
               configIcon={configIconRight}
               onPress={this.onIconPress}
             />
-          }
+)}
         />
       </View>
     );

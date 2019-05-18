@@ -1,9 +1,9 @@
-import React, { Component, ReactElement } from 'react';
-import { Card, Text } from 'react-native-elements';
+import React, { Component } from 'react';
+import { Card } from 'react-native-elements';
 import { ActivityIndicator, View } from 'react-native';
 
-import Item from './Item';
 import { connect } from 'react-redux';
+import Item from './Item';
 
 import { getProdutos } from '../../actions/produtos';
 import { AppState } from '../../reducers';
@@ -21,7 +21,7 @@ class CardOffers extends Component<IProps> {
 
   render() {
     const { loading, produtos } = this.props.produtos;
-    let listItems = <ActivityIndicator size='large' color='#E60014' />;
+    let listItems = <ActivityIndicator size="large" color="#E60014" />;
     if (!loading) {
       listItems = (
         <View>
@@ -38,7 +38,7 @@ class CardOffers extends Component<IProps> {
     }
 
     return (
-      <Card title={'OFERTAS DO DIA'} containerStyle={{ marginBottom: 20 }}>
+      <Card title="OFERTAS DO DIA" containerStyle={{ marginBottom: 20 }}>
         {listItems}
       </Card>
     );
@@ -46,9 +46,9 @@ class CardOffers extends Component<IProps> {
 }
 const mapStateToProps = (state: AppState) => ({
   produtos: state.produtos,
-  getProdutos: getProdutos
+  getProdutos,
 });
 export default connect(
   mapStateToProps,
-  { getProdutos }
+  { getProdutos },
 )(CardOffers);

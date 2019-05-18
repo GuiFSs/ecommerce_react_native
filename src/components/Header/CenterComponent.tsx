@@ -8,7 +8,7 @@ interface IProps {
   value: string;
 }
 
-const CenterComponent: React.SFC<IProps> = ({ type, onChangeText, value }) => {
+const CenterComponent: React.SFC<IProps> = ({ type, onChangeText, value }: IProps) => {
   let component = (
     <Text h3 style={{ color: '#fff' }}>
       MY LOGO
@@ -18,10 +18,10 @@ const CenterComponent: React.SFC<IProps> = ({ type, onChangeText, value }) => {
   if (type === 'input') {
     component = (
       <TextInput
-        placeholderTextColor='#fff'
-        placeholder='tem tuuudo, pode procurar :)'
+        placeholderTextColor="#fff"
+        placeholder="tem tuuudo, pode procurar :)"
         style={{ color: '#fff', fontSize: 18 }}
-        autoFocus={true}
+        autoFocus
         onChangeText={text => onChangeText(text)}
         value={value}
       />

@@ -7,14 +7,14 @@ import Departamentos from './screens/Departamentos';
 const App = createDrawerNavigator(
   {
     home: {
-      screen: HomeScreen
+      screen: HomeScreen,
     },
     departamentos: {
-      screen: Departamentos
-    }
+      screen: Departamentos,
+    },
   },
 
-  { contentComponent: DrawerList }
+  { contentComponent: DrawerList },
 );
 
 export default createAppContainer(App);

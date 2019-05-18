@@ -11,25 +11,23 @@ interface IProps {
   onIconPress: Function;
 }
 
-const IconsLeft: React.SFC<IProps> = ({ configIcon, onIconPress }) => {
-  return (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-      }}
-    >
-      {configIcon.show && (
-        <Icon
-          name={configIcon.name}
-          type='font-awesome'
-          color='#fff'
-          size={iconSize}
-          onPress={() => onIconPress(configIcon.name)}
-        />
-      )}
-    </View>
-  );
-};
+const IconsLeft: React.SFC<IProps> = ({ configIcon, onIconPress }: IProps) => (
+  <View
+    style={{
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    }}
+  >
+    {configIcon.show && (
+    <Icon
+      name={configIcon.name}
+      type="font-awesome"
+      color="#fff"
+      size={iconSize}
+      onPress={() => onIconPress(configIcon.name)}
+    />
+    )}
+  </View>
+);
 
 export default IconsLeft;

@@ -5,7 +5,6 @@ import { ListItem, Icon, Text } from 'react-native-elements';
 
 import { NavigationActions, DrawerItemsProps } from 'react-navigation';
 import LoginModal from '../LoginModal/LoginModal';
-import { INavigationProps } from '../../models/types/types';
 
 interface IState {
   showLoginModal: boolean;
@@ -19,27 +18,27 @@ export default class DrawerList extends Component<DrawerItemsProps, IState> {
       {
         title: 'destaques',
         icon: 'home',
-        routeName: 'home'
+        routeName: 'home',
       },
       {
         title: 'departamentos',
         icon: 'list-ul',
-        routeName: 'departamentos'
-      }
-    ]
+        routeName: 'departamentos',
+      },
+    ],
   };
+
   onPressItem = (route: string) => {
+    const { navigation } = this.props;
     const navigateAction = NavigationActions.navigate({
-      routeName: route
+      routeName: route,
     });
-    this.props.navigation.dispatch(navigateAction);
+    navigation.dispatch(navigateAction);
   };
 
   handlerLoginModal = () => {
-    console.log('pressed');
-
     this.setState(prevState => ({
-      showLoginModal: !prevState.showLoginModal
+      showLoginModal: !prevState.showLoginModal,
     }));
   };
 
@@ -50,9 +49,9 @@ export default class DrawerList extends Component<DrawerItemsProps, IState> {
       <View>
         <View style={styles.userView} onTouchEnd={this.handlerLoginModal}>
           <Icon
-            name='person'
-            type='material'
-            color='#DADADA'
+            name="person"
+            type="material"
+            color="#DADADA"
             size={60}
             containerStyle={{ left: 20, top: 10 }}
           />
@@ -76,7 +75,7 @@ export default class DrawerList extends Component<DrawerItemsProps, IState> {
           <View>
             {list.map((item, i) => (
               <ListItem
-                key={i}
+                key={item.routeName}
                 title={item.title}
                 leftIcon={{ name: item.icon, type: 'font-awesome' }}
                 onPress={() => this.onPressItem(item.routeName)}
@@ -94,18 +93,18 @@ const styles = StyleSheet.create({
   userView: {
     backgroundColor: '#E60014',
     height: 80,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   textUser: {
     top: 10,
-    left: 30
+    left: 30,
   },
   textLogin: {
     color: '#fff',
-    fontSize: 22
+    fontSize: 22,
   },
   textCadastro: {
     color: '#DADADA',
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });

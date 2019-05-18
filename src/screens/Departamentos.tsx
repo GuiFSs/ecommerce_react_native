@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
-export class Departamentos extends Component {
+class Departamentos extends Component {
   render() {
     return (
       <View>

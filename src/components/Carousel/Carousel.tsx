@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
+import {
+  View, ScrollView, Dimensions, ActivityIndicator,
+} from 'react-native';
 import { Image } from 'react-native-elements';
 import axios from 'axios';
 import { IAnuncio } from '../../models/types/types';
@@ -13,13 +15,13 @@ const height = Math.round((width * 9) / 16);
 
 export default class Carousel extends Component<{}, IState> {
   state: IState = {
-    anuncios: []
+    anuncios: [],
   };
 
   async componentDidMount() {
     try {
       const { data } = await axios.get<IAnuncio[]>(
-        'https://aux-ecommerce-api.herokuapp.com/api/anuncio'
+        'https://aux-ecommerce-api.herokuapp.com/api/anuncio',
       );
       this.setState({ anuncios: data });
     } catch (err) {
@@ -33,8 +35,8 @@ export default class Carousel extends Component<{}, IState> {
     return (
       <View>
         <ScrollView
-          horizontal={true}
-          showsHorizontalScrollIndicator={true}
+          horizontal
+          showsHorizontalScrollIndicator
           scrollEventThrottle={10}
           pagingEnabled
         >
@@ -42,7 +44,7 @@ export default class Carousel extends Component<{}, IState> {
             <View key={anuncio._id}>
               <Image
                 source={{ uri: anuncio.imagem }}
-                style={{ width: width, height: height }}
+                style={{ width, height }}
               />
             </View>
           ))}
